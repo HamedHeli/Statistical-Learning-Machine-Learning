@@ -19,6 +19,9 @@ venv/
 Thumbs.db
 *.swp
 
-# any PDF with "instruction" in the filename
+# any private pdf
 **/*instruction*.pdf
 **/*Instruction*.pdf
+**/*Hamed*.pdf
+**/*Helisaz*.pdf
+

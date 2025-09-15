@@ -17,7 +17,9 @@
 % NOTE: If you get
 %  ! Package minted Error: You must invoke LaTeX with the -shell-escape flag.
 % and don't want to use minted, just comment out the next line
-\usepackage{minted} \BeforeBeginEnvironment{minted}{\begingroup\color{black}} \AfterEndEnvironment{minted}{\endgroup} \setminted{autogobble,breaklines,breakanywhere,linenos}
+
+
+\usepackage[cache=false]{minted} \BeforeBeginEnvironment{minted}{\begingroup\color{black}} \AfterEndEnvironment{minted}{\endgroup} \setminted{autogobble,breaklines,breakanywhere,linenos}
 
 \usepackage{listings}
 
@@ -51,50 +53,11 @@
 
 \begin{document}
 
-  \title{CPSC 340 Assignment 1}
-
-  \date{}
-  \maketitle
-
-
-  \textbf{Commentary on Assignment 1}: CPSC 340 is tough because it combines knowledge and skills across several disciplines. To succeed
-  in the course, you will need to know or very quickly get up to speed on:
-  \begin{itemize}
-  \item Basic Python programming, including NumPy and plotting with matplotlib.
-  \item Math to the level of the course prerequisites: linear algebra, multivariable calculus, some probability.
-  \item Statistics, algorithms and data structures to the level of the course prerequisites.
-  \item Some basic LaTeX skills so that you can typeset equations and submit your assignments.
-  \end{itemize}
-
-  This assignment will help you assess whether you are prepared for this course. We anticipate that each
-  of you will have different strengths and weaknesses, so don't be worried if you struggle with \emph{some} aspects
-  of the assignment. \textbf{But if you find this assignment
-  to be very difficult overall, that is a warning sign that you may not be prepared to take CPSC 340
-  at this time.} Future assignments will be more difficult than this one (and probably around the same length).
-
-  Questions 1-4 are on review material, that we expect you to know coming into the course. The rest is new CPSC 340 material from the first few lectures.
-
-  \textbf{A note on the provided code:} in the \texttt{code} directory we provide you with a file called
-  \texttt{main.py}. This file, when run with different arguments, runs the code for different
-  parts of the assignment. For example,
-  \begin{verbatim}
-  python main.py 6.2
-  \end{verbatim}
-  runs the code for Question 6.2. At present this should do nothing, because the code
-  for Question 6.2 still needs to be written (by you). But we do provide some of the bits
-  and pieces to save you time, so that you can focus on the machine learning aspects.
-  For example, you'll see that the provided code already loads the datasets for you.
-  The file \texttt{utils.py} contains some helper functions.
-  You don't need to read or modify the code in there.
-  To complete your assignment, you will need to modify \texttt{grads.py}, \texttt{main.py}, \texttt{decision\string_stump.py} and \texttt{simple\string_decision.py} (which you'll need to create).
-
-  \section*{Instructions \pts{5}}
-
-  The above points are allocated for following the submission instructions which can be accessed from the Resources tab on the 
-  course Piazza page. \textbf{PLEASE READ THEM!!} Both you and the person marking your assignment will be much happier if you do. Click \href{https://www.students.cs.ubc.ca/~cs-340/homework/submissioninstructions.pdf}{here} for the link to the instructions. 
-
-  \vspace{1em}
-  We use \ask{blue} to highlight the deliverables that you must answer/do/submit with the assignment.
+  \title{CPSC 540 Project 1}
+    \author{Hamed Helisaz}
+    
+    \date{\today}
+    \maketitle
 
   \section{Linear Algebra Review \pts{17}}
 
@@ -131,12 +94,46 @@
   \ask{Evaluate the following expressions} (you do not need to show your work).
   \begin{enumerate}
   \item $\sum_{i=1}^n x_iy_i$ (inner product).
+    \begin{answer}
+      14
+    \end{answer}
   \item $\sum_{i=1}^n x_i z_i$ (inner product between orthogonal vectors).
+    \begin{answer}
+      0
+    \end{answer}
   \item $\alpha(x+z)$ (vector addition and scalar multiplication)
+    \begin{answer}
+        $\left[\begin{array}{c}
+          2\\
+          10\\
+          0\\
+          \end{array}\right]$
+    \end{answer}
+  
   \item $x^Tz + \norm{x}$ (inner product in matrix notation and Euclidean norm of $x$).
+  \begin{answer}
+      $\sqrt{5}$
+  \end{answer}
   \item $Ax$ (matrix-vector multiplication).
+      \begin{answer}
+        $\left[\begin{array}{c}
+          6\\
+          5\\
+          7\\
+          \end{array}\right]$
+    \end{answer}
   \item $x^TAx$ (quadratic form).
+  \begin{answer}
+      19
+  \end{answer}
   \item $A^TA$ (matrix tranpose and matrix multiplication).
+  \begin{answer}
+    $\left[\begin{array}{ccc}
+    11 & 10 & 10\\
+    10 & 14 & 10\\
+    10 & 10 & 14
+  \end{array}\right]$,
+  \end{answer}
   \end{enumerate}
 
   \subsection{Matrix Algebra Rules \pts{10}}
@@ -145,15 +142,45 @@
 
   \begin{enumerate}
   \item $x^Ty = \sum_{i=1}^n x_iy_i$.
+    \begin{answer}
+        True
+    \end{answer}
   \item $x^Tx = \norm{x}^2$.
+  \begin{answer}
+      True
+  \end{answer}
   \item $x^Tx = xx^T$.
+  \begin{answer}
+      False
+  \end{answer}
   \item $(x-y)^T(x-y) = \norm{x}^2 - 2x^Ty + \norm{y}^2$.
+  \begin{answer}
+      True
+  \end{answer}
   \item $AB=BA$.
+  \begin{answer}
+      False
+  \end{answer}
   \item $A^T(B + IC) = A^TB + A^TC$.
+    \begin{answer}
+      True
+  \end{answer}
   \item $(A + BC)^T = A^T + B^TC^T$.
+    \begin{answer}
+      False
+  \end{answer}
   \item $x^TAy = y^TA^Tx$.
+    \begin{answer}
+      True
+  \end{answer}
   \item $A^TA = AA^T$ if $A$ is a symmetric matrix.
+    \begin{answer}
+      True
+  \end{answer}
   \item $A^TA = 0$ if the columns of $A$ are orthonormal.
+    \begin{answer}
+      False
+  \end{answer}
   \end{enumerate}
 
 
@@ -170,10 +197,12 @@
   \ask{Answer the following questions.} You do not need to show your work.
 
   \begin{enumerate}
-  \item You are offered the opportunity to play the following game: your opponent rolls 2 regular 6-sided dice. If the difference between the two rolls is at least 3, you win \$30. Otherwise, you get nothing. What is a fair price for a ticket to play this game once? In other words, what is the expected value of playing the game?
+  \item You are offered the opportunity to play the following game: your opponent rolls 2 regular 6-sided dice. If the difference between the two rolls is at least 3, you win \$30. Otherwise, you get nothing. What is a fair price for a ticket to play this game once? In other words, what is the expected value of playing the game?\ans{\$10}
   \item Consider two events $A$ and $B$ such that $\Pr(A \cap B)=0$ (they are mutually exclusive). If $\Pr(A) = 0.4$ and $\Pr(A \cup B) = 0.95$, what is $\Pr(B)$? Note: $\Pr(A \cap B)$ means
   ``probability of $A$ and $B$'' while $p(A \cup B)$ means ``probability of $A$ or $B$''. It may be helpful to draw a Venn diagram.
+  \ans{0.55}
   \item Instead of assuming that $A$ and $B$ are mutually exclusive ($\Pr(A \cap B) = 0)$, what is the answer to the previous question if we assume that $A$ and $B$ are independent?
+  \ans{0.92}
 
 
   \end{enumerate}
@@ -186,10 +215,15 @@
 
   \begin{enumerate}
   \item What is the probability that a random person would test positive, $P(T=1)$?
+  \ans{1.01\%}
   \item In the above, do most of these positive tests come from true positives or from false positives?
+  \ans{False Positive}
   \item What is the probability that a random person who tests positive is a user, $P(D=1 \mid T=1)$?
+  \ans{0.96\%}
   \item Suppose you have given this test to a random person and it came back positive, are they likely to be a drug user?
+  \ans{0.96\%}
   \item Suppose you are the designer of this drug test. You may change how the test is conducted, which may influence factors like false positive rate, false negative rate, and the number of samples collected. What is one factor you could change to make this a more useful test?
+  \ans{Reduce false positive rates (increase specificity) as most of positives are not detected}
   \end{enumerate}
 
 
@@ -204,8 +238,11 @@
 
   \begin{enumerate}
   \item Find the derivative of the function $f(x) = 5x^3 -2x + 5$.
+  \ans{$f'(x)=15x^{2}-2$}
   \item Find the derivative of the function $f(x) = x(1-x)$.
+  \ans{$f'(x)=1-2x$}
   \item Let $p(x) = \frac{1}{1+\exp(-x)}$ for $x \in \R$. Compute the derivative of the function $f(x) = x-\log(p(x))$ and simplify it by using the function $p(x)$.
+  \ans{$p(x)$}
   \end{enumerate}
   Remember that in this course we will $\log(x)$ to mean the ``natural'' logarithm of $x$, so that $\log(\exp(1)) = 1$. Also, observe that $p(x) = 1-p(-x)$ for the final part.
 
@@ -215,12 +252,39 @@
   \ask{Compute the gradient vector $\nabla f(x)$ of each of the following functions.} You do not need to show your work.
   \begin{enumerate}
   \item $f(x) = x_1^2 + \exp(x_1 + 3x_2)$ where $x \in \R^2$.
+    \begin{answer}
+    $\left[\begin{array}{c}
+      2x_1+\exp(x_1+3x_2)\\
+      3\exp(x_1+3x_2)\\
+      \end{array}\right]$
+    \end{answer}
   \item $f(x) = \log\left(\sum_{i=1}^3\exp(x_i)\right)$ where $x \in \R^3$ (simplify the gradient by defining $Z = \sum_{i=1}^3\exp(x_i)$).
+  \begin{answer}
+    $\left[\begin{array}{c}
+    \exp(x_1)/Z\\
+    \exp(x_2)/Z\\
+    \exp(x_3)/Z\\
+    \end{array}\right]$
+    \end{answer}
   \item $f(x) = a^Tx + b$ where $x \in \R^3$ and $a \in \R^3$ and $b \in \R$.
+  \begin{answer}
+        $\left[\begin{array}{c}
+        a_1\\
+        a_2\\
+        a_3\\
+        \end{array}\right]$
+    \end{answer}
   \item $f(x) = \frac12 x^\top A x$ where $A=\left[ \begin{array}{cc}
   4 & -1 \\
   -1 & 4 \end{array} \right]$ and $x \in \mathbb{R}^2$.
+  \begin{answer}
+        $\left[\begin{array}{c}
+        4x_1-x_2\\
+        -x_1+4x_2\\
+        \end{array}\right]$
+   \end{answer}
   \item $f(x) = \frac{1}{2}\norm{x}^2$ where $x \in \R^d$.
+  \ans{$x$}
   \end{enumerate}
 
   Hint: it may be helpful to write out the linear algebra expressions in terms of summations.
@@ -233,11 +297,22 @@
 
   \begin{enumerate}
   \item $\min \, 3x^2-2x+5$, or, in words, the minimum value of the function $f(x) = 3x^2 -2x + 5$ for $x \in \R$.
+  \ans{14/3}
   \item $\max_{x \in [0, 1]} x(1-x)$
+  \ans{1/4}
   \item $\min_{x \in [0, 1]} \, x(1-x)$
+  \ans{0}
   \item $\argmax_{x \in [0,1]} \, x(1-x)$
+  \ans{1/2}
   \item $\min_{x \in [0, 1]^2} \, x_1^2 + \exp(x_2)$ -- in other words $x_1\in [0,1]$ and $x_2\in [0,1]$
+  \ans{1}
   \item $\argmin_{x \in [0,1]^2} \, x_1^2 + \exp(x_2)$ where $x \in [0,1]^2$.
+    \begin{answer}
+        $\left[\begin{array}{c}
+        0\\
+        0\\
+        \end{array}\right]$
+   \end{answer}
   \end{enumerate}
 
   Note: the notation $x\in [0,1]$ means ``$x$ is in the interval $[0,1]$'', or, also equivalently, $0 \leq x \leq 1$.
@@ -269,6 +344,25 @@
   Python will complain and you might get mysterious errors... this is one of the most annoying aspects
   of Python, especially when starting out. So, please be aware of this issue! And if in doubt you can just manually
   indent with 4 spaces, or convert everything to tabs.
+    \begin{answer}
+        \begin{minted}{python}
+    def foo_grad(x):
+        x = np.asarray(x)
+        return 4 * x**3
+        \end{minted}{python}
+        \begin{minted}{python}
+    def bar_grad(x):
+        x = np.asarray(x)
+        if_zeros = (x == 0)
+        zero_counts = if_zeros.sum()
+        if zero_counts == 0:
+             return np.prod(x)/x
+        grad = np.zeros_like(x)
+        if zero_counts == 1:
+            grad[if_zeros] =  np.prod(x[~if_zeros])
+        return grad
+        \end{minted}{python}
+    \end{answer}
 
   \clearpage\section{Algorithms and Data Structures Review \pts{11}}
 
@@ -279,7 +373,9 @@
 
   \begin{enumerate}
   \item What is the minimum depth of a binary tree with 128 leaf nodes?
+  \ans{7}
   \item What is the minimum depth of binary tree with 128 nodes (including leaves and all other nodes)?
+  \ans{7}
   \end{enumerate}
 
   \subsection{Common Runtimes \pts{5}}
@@ -288,16 +384,30 @@
   Here, the word ``list'' means e.g.\ a Python \texttt{list} -- an array, not a linked list.
   \begin{enumerate}
   \item What is the cost of finding the largest number in an unsorted list of $n$ numbers?
+  \ans{O($n$)}
   \item What is the cost of finding the smallest element greater than 0 in a \emph{sorted} list with $n$ numbers.
+  \ans{O(log($n$))}
   \item What is the cost of finding the value associated with a key in a hash table with $n$ numbers? \\(Assume the values and keys are both scalars.)
+  \ans{O(1)}
   \item What is the cost of computing the inner product $a^Tx$, where $a$ is $d \times 1$ and $x$ is $d \times 1$?
+  \ans{O($d$)}
   \item What is the cost of computing the quadratic form $x^TAx$ when $A$ is $d \times d$ and $x$ is $d \times 1$?
+  \ans{O($d^2$)}
   \end{enumerate}
-
+  
   \subsection{Running times of code \pts{4}}
 
   Your repository contains a file named \texttt{bigO.py}, which defines several functions
   that take an integer argument $N$. For each function, \ask{state the running time as a function of $N$, using big-O notation}.
+  \begin{answer}
+      \begin{itemize}
+          \item func1(N) \Longrightarrow O($N$)
+          \item func2(N) \Longrightarrow O($N$)
+          \item func3(N) \Longrightarrow O($1$)
+          \item func4(N) \Longrightarrow O($N^2$)
+      \end{itemize}
+      
+  \end{answer}
 
 
   \section{Data Exploration \pts{5}}
@@ -315,10 +425,65 @@
   \ask{Report the following statistics}:
   \begin{enumerate}
   \item The minimum, maximum, mean, median, and mode of all values across the dataset. \textbf{Note:} A mode function is defined for you it \texttt{utils.py}. 
+  \begin{answer}
+    \begin{itemize}
+        \item   Min is 0.35
+        \item   Max is 4.86
+        \item   Mean is 1.32
+        \item   Median is 1.16
+        \item   Mode is 0.77
+    \end{itemize}
+          \end{answer}
   \item The $5\%$, $25\%$, $50\%$, $75\%$, and $95\%$ quantiles of all values across the dataset.
+  \begin{answer}
+    \begin{itemize}
+        \item  5\% Quantile is 0.46
+        \item  25\% Quantile is 0.72
+        \item  50\% Quantile is 1.16
+        \item 75\% Quantile is 1.81
+        \item 95\% Quantile is 2.62
+    \end{itemize}
+  \end{answer}
   \item The names of the regions with the highest and lowest means, and the highest and lowest variances.
+  \begin{answer}
+      \begin{itemize}
+        \item Region with the highest mean is WtdILI
+        \item Region with the lowest mean is Pac
+        \item Region with the highest variance is Mtn
+        \item Region with the lowest variance is Pac
+      \end{itemize}
+  \end{answer}
   \end{enumerate}
+  \begin{answer}
+      \begin{minted}{python}
+    def q5_1():
+        df = pd.read_csv(Path("..", "data", "fluTrends.csv"))
+        X = df.values
+        names = df.columns.values
+    
+        print("5.1.1 \n")
+        print(f"Min is {X.min():.2f}\n")
+        print(f"Max is {X.max():.2f}\n")
+        print(f"Mean is {X.mean():.2f}\n")
+        print(f"Median is {np.median(X):.2f}\n")
+        print(f"Mode is {mode(X):.2f}\n")
+        print("5.1.2 \n")
+        print(f"5% Quantile is {np.quantile(X,0.05):.2f}\n")
+        print(f"25% Quantile is {np.quantile(X,0.25):.2f}\n")
+        print(f"50% Quantile is {np.quantile(X,0.5):.2f}\n")
+        print(f"75% Quantile is {np.quantile(X,0.75):.2f}\n")
+        print(f"95% Quantile is {np.quantile(X,0.95):.2f}\n")
+        print("5.1.3 \n")
+        print(f"Region with the highest mean is {df.mean().idxmax()}")
+        print(f"Region with the lowest mean is {df.mean().idxmin()}")
+        print(f"Region with the highest variance is {df.var().idxmax()}")
+        print(f"Region with the lowest variance is {df.var().idxmin()}")
+        \end{minted}{python}
+  \end{answer}
   In light of the above, \ask{is the mode a reliable estimate of the most ``common" value? Describe another way we could give a meaningful ``mode" measurement for this (continuous) data.} Note: the function \texttt{utils.mode()} will compute the mode value of an array for you.
+  \begin{answer}
+      No, since data is continuous, data that are very close but not \textit{exactly} identical are treated as distinct in \texttt{mode} function. A better way is to group the data into intervals (bins) and report the bin with the highest frequency.
+  \end{answer}
 
 
   \subsection{Data Visualization \pts{3}}
@@ -338,6 +503,15 @@
   \end{enumerate}
 
   \ask{Match the plots (labeled A-F) with the descriptions above (labeled 1-6), with an extremely brief (a few words is fine) explanation for each decision.}
+  \begin{answer}
+  \\
+        \textbf{Plot A} \rightarrow (4) & \text{ Percentages over time (multi-line time series vs.\ weeks).}\\
+        \textbf{Plot B} \rightarrow (3) & \text{ Boxplots by week (distribution for all regions for each week).}\\
+        \textbf{Plot C} \rightarrow (2) & \text{ Histogram of all values in } X.\\
+        \textbf{Plot D} \rightarrow (1) & \text{ Per-column histograms (one per region of } X\text{).}\\
+        \textbf{Plot E} \rightarrow (6) & \text{ Scatterplot of two regions with lowest correlation, with weak linear relation}\\
+        \textbf{Plot F} \rightarrow (5) & \text{ Scatterplot of two regions with highest correlation, with tight near-line relation}$
+\end{answer}
 
 
 
@@ -370,6 +544,8 @@
 
   Is there a particular type of features for which it makes sense to use an equality-based splitting rule rather than the threshold-based splits we discussed in class?
 
+  \ans{No, the data do not seem to be split well using an equality-based splitting rule. Threshold-based splits seem to be more appropriate}
+
 
   \subsection{Decision Stump Implementation \pts{8}}
 
@@ -387,6 +563,80 @@
   Hint: A correct implementation will achieve an error in the neighbourhood of 0.250. Our reference implementation gets 0.253. 
   Note: please keep the same variable names, as subsequent parts of this assignment rely on this!
 
+\begin{answer}
+\centerfig{0.7}{./figs/DecisionStumpErrorRate_decisionBoundary}
+    Error Rate = 0.253
+    \begin{minted}{python}
+class DecisionStumpErrorRate:
+    y_hat_yes = None
+    y_hat_no = None
+    j_best = None
+    t_best = None
+    
+    def fit(self, X, y):
+        n, d = X.shape
+
+        # Get an array with the number of 0's, number of 1's, etc.
+        count = np.bincount(y)
+
+        # Get the index of the largest value in count.
+        # Thus, y_mode is the mode (most popular value) of y
+        y_mode = np.argmax(count)
+
+        self.y_hat_yes = y_mode
+        self.y_hat_no = None
+        self.j_best = None
+        self.t_best = None
+
+        # If all the labels are the same, no need to split further
+        if np.unique(y).size <= 1:
+            return
+
+        minError = np.sum(y != y_mode)
+
+        # Loop over features looking for the best split
+        for j in range(d):
+            for i in range(n):
+                # Choose value to equate to
+                t = X[i, j]
+
+                # Find most likely class for each split
+                is_more = X[:, j] > t
+                y_yes_mode = utils.mode(y[is_more])
+                y_no_mode = utils.mode(y[~is_more])  # ~ is "logical not"
+
+                # Make predictions
+                y_pred = y_yes_mode * np.ones(n)
+                y_pred[X[:, j] <= t] = y_no_mode
+
+                # Compute error
+                errors = np.sum(y_pred != y)
+
+                # Compare to minimum error so far
+                if errors < minError:
+                    # This is the lowest error, store this value
+                    minError = errors
+                    self.j_best = j
+                    self.t_best = t
+                    self.y_hat_yes = y_yes_mode
+                    self.y_hat_no = y_no_mode
+    def predict(self, X):
+        n, d = X.shape
+
+        if self.j_best is None:
+            return self.y_hat_yes * np.ones(n)
+
+        y_hat = np.zeros(n)
+
+        for i in range(n):
+            if X[i, self.j_best] > self.t_best:
+                y_hat[i] = self.y_hat_yes
+            else:
+                y_hat[i] = self.y_hat_no
+
+        return y_hat
+    \end{minted}{python}
+\end{answer}
 
 
   \subsection{Decision Stump Info Gain Implementation \pts{8}}
@@ -410,6 +660,77 @@
   a shorter array by default, which is not what you want. Setting \texttt{minlength} to the
   number of classes solves this problem.
 
+  \begin{answer}
+\centerfig{0.7}{./figs/DecisionStumpInfoGain_decisionBoundary}
+    Error Rate = 0.325!
+    \begin{minted}{python}
+class DecisionStumpInfoGain(DecisionStumpErrorRate):
+    # This is not required, but one way to simplify the code is
+    # to have this class inherit from DecisionStumpErrorRate.
+    # Which methods (init, fit, predict) do you need to overwrite?
+    y_hat_yes = None
+    y_hat_no = None
+    j_best = None
+    t_best = None
+
+    def fit(self, X, y):
+        n, d = X.shape
+
+        # Get an array with the number of 0's, number of 1's, etc.
+        count = np.bincount(y)
+
+        # Get the index of the largest value in count.
+        # Thus, y_mode is the mode (most popular value) of y
+        y_mode = np.argmax(count)
+
+        self.y_hat_yes = y_mode
+        self.y_hat_no = None
+        self.j_best = None
+        self.t_best = None
+
+
+        # If all the labels are the same, no need to split further
+        if np.unique(y).size <= 1:
+            return
+
+        maxGain = 0
+
+        # Loop over features looking for the best split
+        for j in range(d):
+            for i in range(n):
+                # Choose value to equate to
+                t = X[i, j]
+
+                # Find most likely class for each split
+                is_more = X[:, j] > t
+                y_yes_mode = utils.mode(y[is_more])
+                y_no_mode = utils.mode(y[~is_more])  # ~ is "logical not"
+
+                # Make predictions
+                y_pred = y_yes_mode * np.ones(n)
+                y_pred[X[:, j] <= t] = y_no_mode
+
+                # Compute gain
+                count_yes = np.bincount(y[is_more], minlength = len(count))
+                n_yes = len(y[is_more]) ## n_less is always positive  
+                count_no = np.bincount(y[~is_more], minlength = len(count))
+                n_no = len(y[~is_more]) 
+                if n_yes == 0 or n_no == 0:
+                    continue 
+                # Find the gain for each possible split
+                gain = entropy(count/n) - n_no/n*entropy(count_no/n_no) - n_yes/n*entropy(count_yes/n_yes)
+
+                # Compare to maximum gain so far
+                if gain > maxGain:
+                    # This is the lowest error, store this value
+                    maxGain = gain
+                    self.j_best = j
+                    self.t_best = t
+                    self.y_hat_yes = y_yes_mode
+                    self.y_hat_no = y_no_mode
+    \end{minted}{python}
+\end{answer}
+
 
   \subsection{Hard-coded Decision Trees \pts{2}}
 
@@ -427,7 +748,23 @@
 
   Hint: if you plot the decision boundary you can do a quick visual check to see if your code is consistent with the plot.
 
-
+    \begin{answer}
+        \begin{minted}{python}
+def predict_hard_coded(X):
+    n, d = X.shape
+    y_hat = np.zeros(n)
+    for i in range(n):
+        if X[:,0] > -80.30510 and X[:,1] > 36.453576:
+            y_hat[i] = 0
+        elif X[:,0] > -80.30510 and X[:,1] <= 36.453576:
+            y_hat[i] = 1
+        elif X[:,0] <= -80.30510 and X[:,1] > 37.669007:
+            y_hat[i] = 0
+        elif X[:,0] <= -80.30510 and X[:,1] <= 37.669007:
+            y_hat[i] = 1
+    return y_hat
+        \end{minted}{python}
+    \end{answer}
 
   \subsection{Decision Tree Training Error \pts{2}}
 
@@ -443,7 +780,14 @@
 
   Note: we set the \verb|random_state| because sklearn's \texttt{DecisionTreeClassifier} is non-deterministic. This is probably
   because it breaks ties randomly.
-
+    \begin{answer}
+        \centerfig{0.7}{./figs/q6_5_tree_errors}
+        The error-rate tree starts a bit better at low depths, but it stops improvement early (depth 4). The info-gain tree and sklearn, however, keeps improving and basically hit around zero training error by depth 9.\\ 
+        With error rate, only the majority matters. A split that makes [0.6, 0.4] is treated the same as [0.9,0.1]. Therefore, many candidate splits tie, and the tree stops splitting which caeses no more progress.\\ 
+        With information gain, uncertainty gets penalized and [0.6,0.4] is worse than [0.9,0.1], so the algorithm has a clear favorite and keeps splitting until leaves are (almost) pure. \\
+        Classification boundary plot for sklearn (and infogain) is shown below:
+        \centerfig{0.7}{./figs/q6_5_decisionBoundary}
+    \end{answer}
   Note: the code also prints out the amount of time spent. You'll notice that sklearn's implementation is substantially faster. This is because
   our implementation is based on the $O(n^2d)$ decision stump learning algorithm and sklearn's implementation presumably uses the faster $O(nd\log n)$
   decision stump learning algorithm that we discussed in lecture.
@@ -454,6 +798,8 @@
   approaches produce the exact same curve of classification error rate vs. tree depth. Does this conclusively demonstrate
   that the two implementations are the same? If so, why? If not, what other experiment might you perform to build confidence
   that the implementations are probably equivalent?
-
+    \begin{answer}
+        No; it does not. First, the running time for our information gain tree is about 4 seconds while scikit-learn's took 0.02 seconds. Also, while error rates for the models are the same, they might have different thresholds and misclassify different examples. To ensure the implementations are the same, predictions should be compared to see if they match. The three structure should also be compared to ensure the nodes make the same split on similar features. 
+    \end{answer}
 
 \end{document}
