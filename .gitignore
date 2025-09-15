@@ -18,3 +18,7 @@ venv/
 .DS_Store
 Thumbs.db
 *.swp
+
+# any PDF with "instruction" in the filename
+**/*instruction*.pdf
+**/*Instruction*.pdf
