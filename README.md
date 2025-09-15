@@ -28,10 +28,15 @@ python code/main.py --help
 
 ## Repo Layout
 ```
-code/      # source (algorithms & CLI)
-data/      # small versioned datasets
-figures/   # generated plots
-README.md
+Project/
+├── code/         # source (algorithms & CLI)
+│   ├── .py files
+├── data/         # small versioned datasets
+│   └── .csv files
+└── figures/      # generated plots
+    └── tree_depth_vs_error.pdf
+Lecture Files     # Lectures related to the Projects
+.README
 ```
 
 ## Notes
