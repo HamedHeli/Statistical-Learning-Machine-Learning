@@ -8,11 +8,10 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Environments
+*.venv/
 .venv/
-venv/
-.env/
-.env*/
-*.env
+.venv*/
+*.venv
 
 # OS/editor
 .DS_Store
