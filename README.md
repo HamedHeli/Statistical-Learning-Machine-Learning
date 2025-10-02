@@ -3,7 +3,8 @@
 A lightweight portfolio of my machine learning coursework. Each project is self‑contained and reproducible, with clear implementations and compact plots. This repo is meant as a simple showcase rather than a full framework.
 
 ## Projects
-- **Project 1 (formerly HW1): Decision Trees from Scratch** — minimal implementations of decision stumps/trees with entropy vs. error‑rate splits, plus a small CLI to reproduce figures.
+- **Project 1: Decision Trees from Scratch** — minimal implementations of decision stumps/trees with entropy vs. error‑rate splits, plus a small CLI to reproduce figures.
+- **Project 2: KNN and Naive Bayes from Scratch** — minimal implementations of k-Nearest Neighbours and Naive Bayes. Key analyses focus on hyperparameter selection, including writing cross-validation from scracth, and evaluating the impact of Laplace smoothing for Naive Bayes,
 
 ## Quick Start
 ```bash
