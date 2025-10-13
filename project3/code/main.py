@@ -44,8 +44,15 @@ def q2_1():
     X = data["X"]
     y = data["y"].squeeze(1)
 
-    """YOUR CODE FOR Q2.1"""
-    raise NotImplementedError()
+    v = np.concatenate((np.repeat(1, 400), np.repeat(0.1, 100)))
+    model = WeightedLeastSquares()
+    model.fit(X,y,v)
+
+    test_and_plot(
+        model, X, y, title="Weighted Least Squares", filename="weighted_least_squares_outliers.pdf"
+    )
+    
+    #raise NotImplementedError()
 
 
 @handle("2.4")
@@ -76,9 +83,20 @@ def q2_4_1():
     X = data["X"]
     y = data["y"].squeeze(1)
 
-    """YOUR CODE HERE FOR Q2.4.1"""
-    # TODO: Finish RobustRegressionLoss in fun_obj.py.
-    raise NotImplementedError()
+
+    fun_obj = RobustRegressionLoss()
+    optimizer = GradientDescentLineSearch(max_evals=100, verbose=False)
+    model = LinearModel(fun_obj, optimizer)
+    model.fit(X, y)
+    print(model.w)
+
+    test_and_plot(
+        model,
+        X,
+        y,
+        title="Robust Linear Regression with Gradient Descent",
+        filename="robust_least_squares_gd.pdf",
+    )
 
 
 @handle("2.4.2")
@@ -96,8 +114,20 @@ def q2_4_2():
     optimizer = GradientDescent(max_evals=100, verbose=False)
     model = LinearModel(fun_obj, optimizer)
     model.fit(X, y)
-    """YOUR CODE HERE FOR Q2.4.2"""
-    raise NotImplementedError()
+
+    optimizer_2 = GradientDescentLineSearch(max_evals=100, verbose=False)
+    model_2 = LinearModel(fun_obj, optimizer_2)
+    model_2.fit(X, y)
+
+    plt.figure()
+    plt.plot(range(len(model.fs)), model.fs, label="Gradient Descent")
+    plt.plot(range(len(model_2.fs)), model_2.fs, label="Gradient Descent with Line Search")
+    plt.xlabel("Iterations")
+    plt.ylabel("Objective Function")
+    plt.legend()
+    filename = Path("..", "figs", "objective_function_comp.pdf")
+    plt.savefig(filename)
+#    raise NotImplementedError()
 
 
 @handle("3")
@@ -160,6 +190,7 @@ def q3_2():
 
     plot_grid_size1 = int(np.ceil(np.sqrt(num_runs)))
     plot_grid_size2 = int(np.ceil(num_runs / plot_grid_size1))
+
 
     fig, axes = plt.subplots(
         plot_grid_size1,

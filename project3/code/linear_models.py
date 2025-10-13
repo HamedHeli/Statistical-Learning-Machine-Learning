@@ -15,8 +15,8 @@ class LeastSquares:
 class WeightedLeastSquares(LeastSquares):
     # inherits the predict() function from LeastSquares
     def fit(self, X, y, v):
-        """YOUR CODE HERE FOR Q2.1"""
-        raise NotImplementedError()
+       self.w = solve(X.T @ np.diag(v) @ X, X.T @ np.diag(v) @ y)
+       # raise NotImplementedError()
 
 
 class LinearModel:
@@ -108,13 +108,14 @@ class LeastSquaresBias:
     "Least Squares with a bias added"
 
     def fit(self, X, y):
-        """YOUR CODE HERE FOR Q3.1"""
-        raise NotImplementedError()
+        n, d = X.shape
+        X_int = np.append(np.ones((n,1)), X, axis = 1)
+        self.w = solve(X_int.T @ X_int, X_int.T @ y)
 
-    def predict(self, X_pred):
-        """YOUR CODE HERE FOR Q3.1"""
-        raise NotImplementedError()
-
+    def predict(self, X):
+        n, d = X.shape
+        X_int = np.append(np.ones((n,1)), X, axis = 1)
+        return X_int @ self.w
 
 class LeastSquaresPoly:
     "Least Squares with polynomial basis"
@@ -124,16 +125,20 @@ class LeastSquaresPoly:
         self.p = p
 
     def fit(self, X, y):
-        """YOUR CODE HERE FOR Q3.2"""
-        raise NotImplementedError()
+        X_poly = self._poly_basis(X)
+        self.w = solve(X_poly.T @ X_poly, X_poly.T @ y)
 
     def predict(self, X_pred):
-        """YOUR CODE HERE FOR Q3.2"""
-        raise NotImplementedError()
+        X_poly = self._poly_basis(X_pred)
+        return X_poly @ self.w
+
 
     # A private helper function to transform any X with d=1 into
     # the polynomial basis defined by this class at initialization.
     # Returns the matrix Z that is the polynomial basis of X.
     def _poly_basis(self, X):
-        """YOUR CODE HERE FOR Q3.2"""
-        raise NotImplementedError()
+        n,b = X.shape
+        X_poly = np.ones((n,1))
+        for i in range(1, self.p+1):
+            X_poly = np.append(X_poly, X**i, axis = 1)
+        return X_poly
