@@ -4,7 +4,10 @@ A lightweight portfolio of my machine learning coursework. Each project is self�
 
 ## Projects
 - **Project 1: Decision Trees from Scratch** — minimal implementations of decision stumps/trees with entropy vs. error‑rate splits, plus a small CLI to reproduce figures.
-- **Project 2: KNN and Naive Bayes from Scratch** — minimal implementations of k-Nearest Neighbours and Naive Bayes. Key analyses focus on hyperparameter selection, including writing cross-validation from scracth, and evaluating the impact of Laplace smoothing for Naive Bayes,
+- **Project 2: KNN and Naive Bayes from Scratch** — minimal implementations of k-Nearest Neighbours and Naive Bayes. Key analyses focus on hyperparameter selection, including writing cross-validation from scracth, and evaluating the impact of Laplace smoothing for Naive Bayes.
+
+- **Project 3: Linear and Robust Regression from Scratch** — implementations of least squares, and robust regression models. Both normal equations and gradient descent are considered with outliers handeled using a log-sum-exp loss function. 
+
 
 ## Quick Start
 ```bash
