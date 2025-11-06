@@ -70,8 +70,24 @@ def q2_2():
     X, y = data["X"], data["y"]
     X_valid, y_valid = data["Xvalid"], data["yvalid"]
 
-    """YOUR CODE HERE FOR Q2.2"""
-    pass
+    fun_obj = LogisticRegressionLoss()
+    lammys = [0.01, 0.1, 1, 10]
+    for lammy in lammys:
+        optimizer = GradientDescentLineSearchProxL1(lammy)
+        model = linear_models.LinearClassifier(fun_obj, optimizer)
+        model.fit(X, y)
+
+        print(f"lambda = {lammy:.3f}")
+
+        train_err = classification_error(model.predict(X), y)
+        print(f"Linear Training error: {train_err:.3f}")
+
+        val_err = classification_error(model.predict(X_valid), y_valid)
+        print(f"Linear Validation error: {val_err:.3f}")
+
+        print(f"# nonZeros: {np.sum(model.w != 0)}")
+        print(f"# function evals: {optimizer.num_evals}")
+        print("########################")
 
 
 @handle("2.3")
@@ -94,6 +110,9 @@ def q2_3():
 
     print(f"# nonZeros: {np.sum(model.w != 0)}")
     print(f"total function evaluations: {model.total_evals:,}")
+
+
+
 
 
 @handle("3")
@@ -162,8 +181,37 @@ def q3_5():
     X, y = data["X"], data["y"]
     X_valid, y_valid = data["Xvalid"], data["yvalid"]
 
-    """YOUR CODE HERE FOR Q3.5"""
-    pass
+    ovr_model = LogisticRegression(
+    multi_class='ovr',
+    penalty='none',
+    fit_intercept=False,
+    solver='lbfgs')
+    
+    ovr_model.fit(X, y)
+    
+    softmax_model = LogisticRegression(
+    multi_class='multinomial',
+    penalty='none',
+    fit_intercept=False,
+    solver='lbfgs')
+    
+    softmax_model.fit(X, y)
+
+    train_err_ovr = classification_error(ovr_model.predict(X), y)
+    print(f"sklearn training 0-1 error - One vs All: {train_err_ovr:.3f}")
+
+    val_err_ovr = classification_error(ovr_model.predict(X_valid), y_valid)
+    print(f"sklearn validation 0-1 error - One vs All: {val_err_ovr:.3f}")
+
+    print(f"model predicted classes - One vs All: {np.unique(ovr_model.predict(X))}")
+
+    train_err_softmax = classification_error(softmax_model.predict(X), y)
+    print(f"sklearn training 0-1 error - Softmax: {train_err_softmax:.3f}")
+
+    val_err_softmax = classification_error(softmax_model.predict(X_valid), y_valid)
+    print(f"sklearn validation 0-1 error - Softmax: {val_err_softmax:.3f}")
+
+    print(f"model predicted classes: - Softmax {np.unique(softmax_model.predict(X))}")
 
 
 if __name__ == "__main__":

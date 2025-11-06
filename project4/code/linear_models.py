@@ -130,15 +130,20 @@ class LinearClassifierForwardSel(LinearClassifier):
             for j in range(d):
                 if selected[j]:
                     continue
-
                 selected_with_j = selected.copy()
                 selected_with_j[j] = True
+                X_with_j = X[:,selected_with_j]
 
-                """YOUR CODE HERE FOR Q2.3"""
-                # TODO: Fit the model with 'j' added to the features,
-                # then compute the loss and update the min_loss/best_feature.
-                # Also update self.total_evals.
-                pass
+                w = np.zeros(selected_with_j.sum())
+                # Optimize
+                w_new, *_ = self.optimize(w, X_with_j, y)
+                local_loss = self.global_loss_fn.evaluate(w_new, X_with_j, y)[0]
+
+                if min_loss > local_loss:
+                    min_loss = local_loss
+                    best_feature = j
+
+                self.total_evals += self.optimizer.num_evals
 
             if min_loss < old_loss:  # something in the loop helped our model
                 selected[best_feature] = True
@@ -199,11 +204,19 @@ class LinearClassifierOneVsAll(LinearClassifier):
         # Initial guesses for weights
         W = np.zeros([k, d])
 
-        """YOUR CODE HERE FOR Q3.2"""
-        # NOTE: make sure that you use {-1, 1} labels y for logistic regression,
-        #       not {0, 1} or anything else.
-        pass
+        
+        for i in range(k):
+            ytmp = y.copy().astype(float)
+            ytmp[y == i] = 1
+            ytmp[y != i] = -1
 
+                    # Initial guess
+            w = np.zeros(d)
+
+            # Optimize
+            w, *_ = self.optimize(w, X, ytmp)
+            W[i,] = w.T 
+        
         self.W = W
 
     def predict(self, X):
@@ -218,9 +231,19 @@ class MulticlassLinearClassifier(LinearClassifier):
     """
 
     def fit(self, X, y):
-        """YOUR CODE HERE FOR Q3.4"""
-        pass
+        n, d = X.shape
+        y_classes = np.unique(y)
+        k = len(y_classes)
+        assert set(y_classes) == set(range(k))  # check labels are {0, 1, ..., k-1}
 
-    def predict(self, X_hat):
-        """YOUR CODE HERE FOR Q3.4"""
-        pass
+        # Initial guesses for weights
+        W = np.zeros([k, d])
+        w = W.flatten()
+        # Optimize
+        w, *_ = self.optimize(w, X, y)
+        self.W = w.reshape(k,d)
+
+    def predict(self, X):
+        scores = X @ self.W.T 
+        ## we do not need probailities - just the score would be enough! 
+        return np.argmax(scores, axis=1)

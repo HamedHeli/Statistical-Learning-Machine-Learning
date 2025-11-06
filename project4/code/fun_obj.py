@@ -122,10 +122,20 @@ class LogisticRegressionLossL2(LogisticRegressionLoss):
     def evaluate(self, w, X, y):
         w = ensure_1d(w)
         y = ensure_1d(y)
+        lammy = self.lammy
 
-        """YOUR CODE HERE FOR Q2.1"""
-        pass
+        Xw = X @ w
+        yXw = y * Xw  # element-wise multiply; the y_i are in {-1, 1}
+        wTw = w * w
 
+        # Calculate the function value
+        f = np.sum(np.log(1 + np.exp(-yXw))) + lammy / 2 * np.sum(wTw)
+
+        # Calculate the gradient value
+        s = -y / (1 + np.exp(yXw))
+        g = X.T @ s + lammy * (w)
+
+        return f, g
 
 class LogisticRegressionLossL0(FunObj):
     def __init__(self, lammy):
@@ -156,8 +166,31 @@ class SoftmaxLoss(FunObj):
 
         n, d = X.shape
         k = len(np.unique(y))
+        W = w.reshape(k, d)
 
-        """YOUR CODE HERE FOR Q3.4"""
-        # Hint: you may want to use NumPy's reshape() or flatten()
-        # to be consistent with our matrix notation.
-        pass
+        f = 0
+        ## Finding f
+        for i in range(n):
+            c = y[i]
+            exp_sum_error = 0
+            for c_prime in range(k):
+                exp_sum_error += np.exp(W[c_prime,].T @ X[i,])
+            f += - W[c].T @ X[i,] + np.log(exp_sum_error)
+
+        ## Finding g 
+        g = np.zeros((k,d))
+        for j in range(d):
+            for c in range(k):
+                g_cj = 0
+                for i in range(n):
+                    c_i = y[i]
+                    p_nom = np.exp(W[c].T @ X[i,])
+                    p_denom = 0
+                    for c_prime in range(k):
+                        p_denom += np.exp(W[c_prime,].T @ X[i,])   
+                    p = p_nom/p_denom
+                    g_cj += X[i,j] * (p - (c == c_i))
+                g[c,j] = g_cj  
+         
+        g = g.flatten()
+        return f, g
