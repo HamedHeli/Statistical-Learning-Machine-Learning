@@ -8,6 +8,8 @@ A lightweight portfolio of my machine learning coursework. Each project is self�
 
 - **Project 3: Linear and Robust Regression from Scratch** — implementations of least squares, and robust regression models. Both normal equations and gradient descent are considered with outliers handeled using a log-sum-exp loss function. 
 
+- **Project 4: Multi-class Logistic Regression from Scratch** — implementations of binary and multi-class logistic regression. Comparing One-vs-All versus Softmax multi-class classification and L1, L2, and L0 regularization.
+
 
 ## Quick Start
 ```bash
