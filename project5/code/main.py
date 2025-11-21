@@ -79,8 +79,29 @@ def q1():
 def q1_1():
     X_train, y_train, X_val, y_val = load_and_split("nonLinearData.pkl")
 
-    """YOUR CODE HERE FOR Q1.1"""
-    pass
+    # kernel logistic regression with a polynomial kernel
+    loss_fn = KernelLogisticRegressionLossL2(1)
+    optimizer = GradientDescentLineSearch()
+    kernel_pol = PolynomialKernel(2)
+    klr_model_pol = KernelClassifier(loss_fn, optimizer, kernel_pol)
+    klr_model_pol.fit(X_train, y_train)
+
+    print(f"Training error {np.mean(klr_model_pol.predict(X_train) != y_train):.1%}")
+    print(f"Validation error {np.mean(klr_model_pol.predict(X_val) != y_val):.1%}")
+
+    fig = plot_classifier(klr_model_pol, X_train, y_train)
+    savefig("logRegPol.png", fig)
+
+    # kernel logistic regression with a RBF kernel
+    kernel_rbf = GaussianRBFKernel(0.5)
+    klr_model_rbf = KernelClassifier(loss_fn, optimizer, kernel_rbf)
+    klr_model_rbf.fit(X_train, y_train)
+
+    print(f"Training error {np.mean(klr_model_rbf.predict(X_train) != y_train):.1%}")
+    print(f"Validation error {np.mean(klr_model_rbf.predict(X_val) != y_val):.1%}")
+
+    fig = plot_classifier(klr_model_rbf, X_train, y_train)
+    savefig("logRegRBF.png", fig)
 
 
 @handle("1.2")

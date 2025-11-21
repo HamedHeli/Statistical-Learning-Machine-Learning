@@ -32,9 +32,7 @@ class PolynomialKernel(Kernel):
         A naive implementation will use change of basis.
         A "kernel trick" implementation bypasses change of basis.
         """
-
-        """YOUR CODE HERE FOR Q1.1"""
-        pass
+        return (X1 @ X2.T ** self.p)
 
 
 class GaussianRBFKernel(Kernel):
@@ -49,5 +47,5 @@ class GaussianRBFKernel(Kernel):
         Evaluate Gaussian RBF basis kernel.
         """
 
-        """YOUR CODE HERE FOR Q1.1"""
-        pass
+        distance_squared = euclidean_dist_squared(X1, X2)
+        return(np.exp(-distance_squared/(2 * self.sigma**2)))
